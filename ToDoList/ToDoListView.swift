@@ -1,21 +1,24 @@
-//
-//  ContentView.swift
-//  ToDoList
-//
-//  Created by Andrew Demopoulos-Nguyen on 3/28/25.
-//
-
 import SwiftUI
 
 struct ToDoListView: View {
+    var toDos = ["Learn Swift", "Build apps", "change the world", "take a vacation"]
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            List {
+                ForEach(toDos, id: \.self) { toDo in
+                    NavigationLink {
+                        DetailView(passedValue: toDo)
+                    } label: {
+                        Text(toDo)
+                    }
+                    
+                }
+            }
+            .navigationTitle("To Do List")
+            .navigationBarTitleDisplayMode(.automatic)
+            .listStyle(.plain)
         }
-        .padding()
+        
     }
 }
 
